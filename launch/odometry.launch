@@ -3,8 +3,8 @@
 
   <!--Odometry arduino-->
    	<node pkg="rosserial_python" type="serial_node.py" name="serial_node">
-   	<!-- <param name="port"            value="/dev/arduino_encoders" /> -->
-   	<param name="port"            value="/dev/ttyACM1" />
+   	<param name="port"            value="/dev/arduino_encoders" /> 
+   	<!-- <param name="port"            value="/dev/ttyACM0" /> -->
    	<param name="baud"            value="115200" />
    </node>
 
@@ -17,12 +17,12 @@
    <!--<node pkg="wheelchair_iaslab_odometry" type="odom_old" name="odom_old">
    </node>-->
 
-  <!--IMU tf
-  	<node pkg="wheelchair_iaslab_odometry" type="imu" name="imu">
-   </node>-->
+  <!--IMU tf -->
+  <node pkg="wheelchair_iaslab_odometry" type="imu" name="imu">
+   </node> 
 
 
-    <!-- IMU filtering
+    <!-- IMU filtering -->
     <node pkg="imu_filter_madgwick" type="imu_filter_node" name="ImuFilter">
         <param name="use_mag" type="bool" value="false" />
         <param name="publish_tf" type="bool" value="false" />
@@ -30,7 +30,7 @@
         <param name="fixed_frame" type="string" value="wcias_imu" />
         <param name="reverse_tf" type="bool" value="false" />
         <remap from="/imu/data_raw" to="/imu_data"/>
-    </node> -->
+    </node> 
 
 
    <!-- Odom callibration using robot_localization package and inputs wheel odometry and IMU-->

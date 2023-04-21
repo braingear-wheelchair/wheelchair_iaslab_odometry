@@ -1,6 +1,6 @@
 #Filter's parameter configuration --> for more info check robot-localization pkg
 
-frequency: 30 # The frequency, in Hz, at which the filter will output a position estimate
+frequency: 50 # The frequency, in Hz, at which the filter will output a position estimate
 silent_tf_failure: false
 sensor_timeout: 0.1 # The period, in seconds, after which we consider a sensor to have timed out
 two_d_mode: true   # operating in a planar environment
@@ -10,9 +10,9 @@ publish_tf: true
 
 
 #map_frame: map              # Defaults to "map" if unspecified
-odom_frame: odom           # Defaults to "odom" if unspecified
+odom_frame: wcias_odom             # Defaults to "odom" if unspecified
 base_link_frame: wcias_base_footprint  # Defaults to "base_link" if unspecified
-#world_frame:            # Defaults to the value of odom_frame if unspecified
+world_frame: wcias_odom           # Defaults to the value of odom_frame if unspecified
 
 
 
@@ -34,9 +34,9 @@ imu0: /imu/data
 
 imu0_config: [false,  false,  false,
                false, false, true,
-               true, true, false,
+               false, false, false,
                false, false, true,
-               true, false, false]
+               true, true, false]
 
 imu0_nodelay: false
 imu0_differential: false
@@ -50,7 +50,7 @@ imu0_linear_acceleration_rejection_threshold: 0.8  #
 imu0_remove_gravitational_acceleration: true
 
 # Whether or not we use the control input during predicition. Defaults to false.
-use_control: false
+use_control: true
 # Whether the input (assumed to be cmd_vel) is a geometry_msgs/Twist or geometry_msgs/TwistStamped message. Defaults to
 # false.
 stamped_control: false

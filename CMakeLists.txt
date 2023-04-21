@@ -23,15 +23,11 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-
-
-
 add_executable(odom src/odom.cpp)
 target_link_libraries(odom ${catkin_LIBRARIES})
 
-add_executable(odom_old src/odom_old.cpp)
-target_link_libraries(odom_old ${catkin_LIBRARIES})
-
+#add_executable(odom_old src/odom_old.cpp)
+#target_link_libraries(odom_old ${catkin_LIBRARIES})
 
 add_executable(imu src/imu.cpp)
 target_link_libraries(imu ${catkin_LIBRARIES})
