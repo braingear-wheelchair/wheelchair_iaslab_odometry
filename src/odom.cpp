@@ -37,11 +37,11 @@ struct wheelchair {
   int N_oneRot   = 500; 
   
   // double N_smallPulley_rightMainWh = 26.0;  // The old value
-  double N_smallPulley_rightMainWh  = 27; 
-  double N_bigPulley_rightMainWh    = 73.1; 
+  double N_smallPulley_rightMainWh  = 26	; 
+  double N_bigPulley_rightMainWh    = 71.53; 
 
   double N_smallPulley_leftMainWh   = 28; 
-  double N_bigPulley_leftMainWh     = 73; 
+  double N_bigPulley_leftMainWh     = 71.63; 
 } wheelchair;
 
 struct encoder_vector {
