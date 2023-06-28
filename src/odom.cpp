@@ -36,7 +36,6 @@ struct wheelchair {
   double lw      = 0.550; //+ 0.07;   //[m]  length between the two drive wheels
   int N_oneRot   = 500; 
   
-  // double N_smallPulley_rightMainWh = 26.0;  // The old value
   double N_smallPulley_rightMainWh  = 26	; 
   double N_bigPulley_rightMainWh    = 71.53; 
 
@@ -45,10 +44,10 @@ struct wheelchair {
 } wheelchair;
 
 struct encoder_vector {
-  long Count1_ini_cts     =  1;
-  long Count2_ini_cts     = -1;
-  long Count1_prev_cts    =  1;
-  long Count2_prev_cts    = -1;
+  double Count1_ini_cts     =  1;
+  double Count2_ini_cts     = -1;
+  double Count1_prev_cts    =  1;
+  double Count2_prev_cts    = -1;
   volatile long int Pos1  =  0;
   volatile long int Pos2  =  0;
   long Count1_cts         =  1;
@@ -63,8 +62,9 @@ struct temporal_delta_values {
 
 void resetCallback(const nav_msgs::Odometry& msg)
 {
-  encoder.Count1_ini_cts = encoder.Pos1;
-  encoder.Count2_ini_cts = encoder.Pos2;
+  // TODO: Check if it is necessary to read the encoder position by half
+  encoder.Count1_ini_cts = encoder.Pos1 / 2;
+  encoder.Count2_ini_cts = encoder.Pos2 / 2;
   
   encoder.Count1_prev_cts = encoder.Pos1;
   encoder.Count2_prev_cts = encoder.Pos2;
@@ -109,6 +109,23 @@ nav_msgs::Odometry generate_odometry_message(struct state_vector state, geometry
   odom.twist.twist.linear.x  = state.vx;
   odom.twist.twist.linear.y  = state.vy;
   odom.twist.twist.angular.z = state.vth;
+  
+  float std = 1e-3f;
+  float stdv = 1e-3f;
+  odom.pose.covariance[0] = std;
+  odom.pose.covariance[7] = std;
+  odom.pose.covariance[14] = std;
+  odom.pose.covariance[21] = std;
+  odom.pose.covariance[28] = std;
+  odom.pose.covariance[35] = std;
+  
+  odom.twist.covariance[0] = stdv;
+  odom.twist.covariance[7] = stdv;
+  odom.twist.covariance[14] = stdv;
+  odom.twist.covariance[21] = stdv;
+  odom.twist.covariance[28] = stdv;
+  odom.twist.covariance[35] = stdv;
+  
 
   return odom;
 }
@@ -138,7 +155,7 @@ struct temporal_delta_values update_global_odometry_variables(ros::Time current_
   double psi_smallPulley_rightWh_rad = encShaft_rightWh_cts * M_PI / wheelchair.N_oneRot; //[rad]
   double psi1_pro_rad = psi_smallPulley_rightWh_rad * wheelchair.N_smallPulley_rightMainWh / wheelchair.N_bigPulley_rightMainWh;  //[rad]
 
-  double psi_smallPulley_leftWh_rad  = encShaft_leftWh_cts  * M_PI / wheelchair.N_oneRot; //[rad]
+  double psi_smallPulley_leftWh_rad  = encShaft_leftWh_cts * M_PI / wheelchair.N_oneRot; //[rad]
   double psi2_pro_rad = psi_smallPulley_leftWh_rad  * wheelchair.N_smallPulley_leftMainWh / wheelchair.N_bigPulley_leftMainWh;    //[rad]
   
   //float dotpsi1_radps = (psi1_rad-psi1_prev_rad)/deltat;

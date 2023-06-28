@@ -32,7 +32,3 @@ target_link_libraries(odom ${catkin_LIBRARIES})
 add_executable(imu src/imu.cpp)
 target_link_libraries(imu ${catkin_LIBRARIES})
 
-catkin_install_python(PROGRAMS scripts/warp_position.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
