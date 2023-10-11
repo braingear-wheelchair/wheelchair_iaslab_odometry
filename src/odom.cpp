@@ -4,7 +4,9 @@
 #include <std_msgs/Float32MultiArray.h>
 #include <std_msgs/MultiArrayDimension.h>
 #include <std_msgs/String.h>
+
 #include <tf/transform_broadcaster.h>
+
 #include <nav_msgs/Odometry.h>
 #include <math.h>
 
@@ -130,7 +132,7 @@ nav_msgs::Odometry generate_odometry_message(struct state_vector state, geometry
   return odom;
 }
 
-geometry_msgs::TransformStamped generate_odometry_tranform_message(struct state_vector state, geometry_msgs::Quaternion odom_quat, ros::Time current_time){
+/* geometry_msgs::TransformStamped generate_odometry_tranform_message(struct state_vector state, geometry_msgs::Quaternion odom_quat, ros::Time current_time){
   //first, we'll publish the transform over tf
   geometry_msgs::TransformStamped odom_trans;
   odom_trans.header.stamp       = current_time;
@@ -143,7 +145,7 @@ geometry_msgs::TransformStamped generate_odometry_tranform_message(struct state_
   odom_trans.transform.rotation      = odom_quat;
 
   return odom_trans;
-}
+} */
 
 struct temporal_delta_values update_global_odometry_variables(ros::Time current_time, ros::Time last_time){
   // TODO: review this code
@@ -199,7 +201,7 @@ int main(int argc, char** argv){
   // TODO: find a better name for the reset point topic
   // ros::Subscriber odometry_reset = nh.subscribe("/odometry_point", 50, reset_odometry_callback);
 
-  tf::TransformBroadcaster odom_broadcaster;
+  //tf::TransformBroadcaster odom_broadcaster;
 
   ros::Time current_time, last_time;
   
@@ -233,9 +235,9 @@ int main(int argc, char** argv){
     //since all odometry is 6DOF we'll need a quaternion created from yaw
     geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(state.th);
 
-    //first, we'll publish the transform over tf
-    geometry_msgs::TransformStamped odom_trans = generate_odometry_tranform_message(state, odom_quat, current_time);
-    odom_broadcaster.sendTransform(odom_trans);
+    //first, we'll publish the transform over tf -> Its automatically done by the urdf scheme
+    //geometry_msgs::TransformStamped odom_trans = generate_odometry_tranform_message(state, odom_quat, current_time);
+    //odom_broadcaster.sendTransform(odom_trans);
 
     //next, we'll publish the odometry message over ROS
     nav_msgs::Odometry odom = generate_odometry_message(state, odom_quat, current_time);
