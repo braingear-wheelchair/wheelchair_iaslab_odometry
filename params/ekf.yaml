@@ -8,6 +8,8 @@ transform_time_offset: 0.0
 print_diagnostics: true
 publish_tf: true
 
+permit_corrected_publication: false
+
 
 #map_frame: map              # Defaults to "map" if unspecified
 odom_frame: wcias_odom             # Defaults to "odom" if unspecified
@@ -17,7 +19,7 @@ world_frame: wcias_odom           # Defaults to the value of odom_frame if unspe
 
 
 #Odometry 
-odom0: /odom
+odom0: /wcias_controller/odom
 
 odom0_config: [true,  true,  false,
                false, false, true,

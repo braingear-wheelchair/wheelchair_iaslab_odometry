@@ -8,6 +8,7 @@
    
   <!--Odom and Odom_tf-->
   <node pkg="wheelchair_iaslab_odometry" type="odom" name="odom">
+    <remap from="/odom" to="/wcias_controller/odom"/>
   </node>
    
   <!--Odom and Odom_tf-->
@@ -18,17 +19,16 @@
   <node pkg="wheelchair_iaslab_odometry" type="imu" name="imu">
   </node> -->
 
-  <!-- IMU filtering -->
+  <!-- IMU filtering 
   <node pkg="imu_filter_madgwick" type="imu_filter_node" name="ImuFilter">
     <param name="use_mag" type="bool" value="false" />
     <param name="publish_tf" type="bool" value="false" />
     <param name="world_frame" type="string" value="enu" />
     <param name="fixed_frame" type="string" value="wcias_imu" />
     <param name="reverse_tf" type="bool" value="false" />
-    <!-- <remap from="/imu/data_raw" to="/imu_data"/> -->
     <remap from="/imu/data_raw" to="/lidar/lidar_camera/imu"/>
     <remap from="/imu/data" to="/imu/filtered"/>
-  </node> 
+  </node> -->
 
   <!-- Odom callibration using robot_localization package and inputs wheel odometry and IMU-->
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf" clear_params="true">
