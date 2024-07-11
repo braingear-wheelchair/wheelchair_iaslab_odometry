@@ -7,9 +7,10 @@
   </node> 
    
   <!--Odom and Odom_tf-->
-  <node pkg="wheelchair_iaslab_odometry" type="odom" name="odom">
+  <!-- Removed for now: using the visual one -->
+  <!-- <node pkg="wheelchair_iaslab_odometry" type="odom" name="odom">
     <remap from="/odom" to="/wcias_controller/odom"/>
-  </node>
+  </node> -->
    
   <!--Odom and Odom_tf-->
   <!--<node pkg="wheelchair_iaslab_odometry" type="odom_old" name="odom_old">

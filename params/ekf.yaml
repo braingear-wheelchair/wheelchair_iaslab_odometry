@@ -31,6 +31,19 @@ odom0_queue_size: 2
 odom0_nodelay: false
 odom0_differential: false
 
+#Odometry 
+odom1: /rtabmap/odom
+
+odom1_config: [true,  true,  false,
+               false, false, true,
+               true, true, false,
+               false, false, true,
+               false, false, false]
+
+odom1_queue_size: 2
+odom1_nodelay: false
+odom1_differential: false
+
 #IMU 
 imu0: /imu/filtered
 
