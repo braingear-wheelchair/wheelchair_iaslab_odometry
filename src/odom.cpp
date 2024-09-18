@@ -34,8 +34,8 @@ double deltat_prev = 0.0;
 
 struct wheelchair {
   // ctdr: whc parameters
-  double radius  = 0.165; //+ 0.0051; //[m] -0.0051  radius of drive wheel
-  double lw      = 0.550; //+ 0.07;   //[m]  length between the two drive wheels
+  double radius  = 0.175; //+ 0.0051; //[m] -0.0051  radius of drive wheel // 0.165
+  double lw      = 0.566; //+ 0.07;   //[m]  length between the two drive wheels // 0.55
   int N_oneRot   = 500; 
   
   double N_smallPulley_rightMainWh  = 26	; 

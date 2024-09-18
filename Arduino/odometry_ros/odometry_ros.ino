@@ -87,6 +87,7 @@ void loop() {
     deltat_betw_succ_readings_micros=time_actu_micros-time_prev_micros; //[microsecond]
   } //if
 
+  // Switch to double?
   float deltat = ((float)deltat_betw_succ_readings_micros)*1e-6; //[sec]
 
   
