@@ -3,15 +3,16 @@ project(wheelchair_iaslab_odometry)
 
 
 find_package(catkin REQUIRED COMPONENTS 
-			 roscpp 
-                         rospy
-                         actionlib
-                         actionlib_msgs
-			 std_msgs
-			 geometry_msgs
-                         sensor_msgs
-                         nav_msgs
-                         tf)
+      roscpp 
+      rospy
+      actionlib
+      actionlib_msgs
+      std_msgs
+      geometry_msgs
+      sensor_msgs
+      nav_msgs
+      tf
+      )
 
 catkin_package(
 
@@ -32,3 +33,6 @@ target_link_libraries(odom ${catkin_LIBRARIES})
 add_executable(imu src/imu.cpp)
 target_link_libraries(imu ${catkin_LIBRARIES})
 
+catkin_install_python(PROGRAMS scripts/arduino_encoder_reader.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

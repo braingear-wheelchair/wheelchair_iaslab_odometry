@@ -1,11 +1,22 @@
 <?xml version="1.0"?>
 <launch> 
   <!--Odometry arduino -->
-  <node pkg="rosserial_python" type="serial_node.py" name="serial_node_odometry">
-    <param name="port"            value="/dev/arduino_encoders" /> 
-   	<param name="baud"            value="115200" />
-  </node> 
-   
+
+  <arg name="real"   default="true" />
+  
+  <group if="$(arg real)">
+    <!-- 
+    <node pkg="rosserial_python" type="serial_node.py" name="serial_node_odometry">
+      <param name="port"            value="/dev/arduino_encoders" /> 
+      <param name="baud"            value="115200" />
+    </node> 
+    --> 
+     <node pkg="wheelchair_iaslab_odometry" type="arduino_encoder_reader.py" name="serial_node_odometry" output="screen">
+      <param name="port"            value="/dev/arduino_encoders" /> 
+      <param name="baud"            value="115200" />
+    </node> 
+  </group>
+
   <!--Odom and Odom_tf-->
   <!-- Removed for now: using the visual one -->
   <node pkg="wheelchair_iaslab_odometry" type="odom" name="odom">
