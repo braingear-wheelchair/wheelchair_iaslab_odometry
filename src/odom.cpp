@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/Point.h>
-#include <std_msgs/Float32MultiArray.h>
+#include <std_msgs/Int32MultiArray.h>
 #include <std_msgs/MultiArrayDimension.h>
 #include <std_msgs/String.h>
 
@@ -86,7 +86,7 @@ void resetCallback(const nav_msgs::Odometry& msg)
   state.vth = msg.twist.twist.angular.z; 
 }
   
-void encoderCallback(const std_msgs::Float32MultiArray::ConstPtr& msg)
+void encoderCallback(const std_msgs::Int32MultiArray::ConstPtr& msg)
 {
   encoder.Pos1 = msg->data[0]; // count left wheel 
   encoder.Pos2 = msg->data[1]; // count right wheel 

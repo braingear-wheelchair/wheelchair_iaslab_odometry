@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import rospy
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Int32MultiArray
 import serial
 
 class ArduinoEncoderReader:
@@ -9,7 +9,7 @@ class ArduinoEncoderReader:
         rospy.init_node('arduino_encoder_reader', anonymous=True)
 
         # Publisher ROS1
-        self.publisher = rospy.Publisher('encoder_counter', Float32MultiArray, queue_size=10)
+        self.publisher = rospy.Publisher('encoder_counter', Int32MultiArray, queue_size=10)
 
         # Porta seriale
         port = rospy.get_param("~port", "/dev/ttyACM1")
@@ -36,8 +36,8 @@ class ArduinoEncoderReader:
                 if line:
                     parts = line.split()
                     if len(parts) == 2:
-                        msg = Float32MultiArray()
-                        msg.data = [float(parts[0]), float(parts[1])]
+                        msg = Int32MultiArray()
+                        msg.data = [int(parts[0]), int(parts[1])]
                         self.publisher.publish(msg)
                         #rospy.loginfo(f"Pubblicato: {msg.data}")
             except Exception as e:
